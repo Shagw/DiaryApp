@@ -14,9 +14,23 @@ class NotesList extends Component {
       updating: false,
       title: "",
       sorting1: "Oldest",
-      filter1: "Week",
+      month: 12,
+      year: 2020,
       sortingArray1: ["Oldest", "Newest"],
-      filterArray1: ["Week", "Month", "Year"],
+      montharray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      yeararray: [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+      ],
     };
   }
 
@@ -54,13 +68,14 @@ class NotesList extends Component {
 
   render() {
     var allnotes = this.props.notes;
+    let sortedArray;
     if (this.state.sorting1 === "Newest") {
-      const sortedAllNotes = allnotes.slice().sort((a, b) => b.date - a.date);
-      allnotes = sortedAllNotes;
+      sortedArray = allnotes.slice().sort((a, b) => b.date - a.date);
+      allnotes = sortedArray;
     }
     if (this.state.sorting1 === "Oldest") {
-      const sortedAllNotes = allnotes.slice().sort((a, b) => a.date - b.date);
-      allnotes = sortedAllNotes;
+      sortedArray = allnotes.slice().sort((a, b) => a.date - b.date);
+      allnotes = sortedArray;
     }
 
     return (
@@ -77,17 +92,21 @@ class NotesList extends Component {
         />
 
         <FilterNotes
-          allnotes={allnotes}
+          allnotes={this.props.notes}
           sorting1={this.state.sorting1}
-          filter1={this.state.filter1}
+          month={this.state.month}
           handleChange={this.handleChange}
           sortingArray1={this.state.sortingArray1}
-          filterArray1={this.state.filterArray1}
+          year={this.state.year}
+          yeararray={this.state.yeararray}
+          montharray={this.state.montharray}
         />
         <NotesListTable
           allnotes={allnotes}
           handleeditbutton={this.handleeditbutton}
           deletenotes={this.props.deletenotes}
+          year={this.state.year}
+          month={this.state.month}
         />
       </div>
     );

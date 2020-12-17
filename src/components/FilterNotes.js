@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class FilterNotes extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     let recommendatonbyoptions = this.props.sortingArray1.map((item, index) => {
       return (
@@ -9,7 +13,14 @@ class FilterNotes extends Component {
         </option>
       );
     });
-    let timewiseoptions = this.props.filterArray1.map((item, index) => {
+    let yearsoption = this.props.yeararray.map((item, index) => {
+      return (
+        <option value={item} key={index}>
+          {item}
+        </option>
+      );
+    });
+    let monthsoption = this.props.montharray.map((item, index) => {
       return (
         <option value={item} key={index}>
           {item}
@@ -41,14 +52,23 @@ class FilterNotes extends Component {
               </select>
             </div>
             <div className="filterdatewise">
-              <label>Filter By :</label>
+              <label className="month">Month</label>
               <select
-                name="sorting2"
-                id="sorting2"
-                value={this.props.filter1}
+                name="month"
+                id="month"
+                value={this.props.month}
                 onChange={this.props.handleChange}
               >
-                {timewiseoptions}
+                {monthsoption}
+              </select>
+              <label className="year">Year</label>
+              <select
+                name="year"
+                id="year"
+                value={this.props.year}
+                onChange={this.props.handleChange}
+              >
+                {yearsoption}
               </select>
             </div>
           </div>

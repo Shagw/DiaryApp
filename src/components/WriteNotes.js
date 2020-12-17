@@ -22,6 +22,7 @@ class WriteNotes extends Component {
     e.preventDefault();
     this.props.addnotes(this.state);
     this.setState({ note: "", title: "" });
+    alert("Successfully Added");
   };
 
   handleNotesList = (e) => {

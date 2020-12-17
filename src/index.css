@@ -135,3 +135,13 @@ code {
   font-size: 15px;
   font-weight: 700;
 }
+
+.month {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+.year {
+  font-size: 12px !important;
+  font-weight: 500;
+}
