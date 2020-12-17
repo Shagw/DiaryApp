@@ -88,3 +88,50 @@ code {
 .allnotes {
   margin: 50px;
 }
+
+.main {
+  margin-left: 90px;
+  margin-right: 50px;
+}
+
+.filter {
+  display: flex;
+  margin: auto;
+}
+.filterdatewise {
+  margin: auto;
+  float: right;
+  margin-right: 0px;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+.filterdatewise label {
+  font-size: small;
+}
+
+.filterdatewise select {
+  border: none;
+  outline: none;
+  margin-left: 2px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sorting {
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+.sorting label {
+  font-size: small;
+}
+
+.sorting select {
+  border: none;
+  outline: none;
+  margin-left: 2px;
+  font-size: 15px;
+  font-weight: 700;
+}

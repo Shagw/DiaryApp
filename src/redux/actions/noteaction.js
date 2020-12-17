@@ -7,7 +7,7 @@ const addnotes = (notes) => async (dispatch) =>
     notes: notes.note,
     title: notes.title,
     id: uuidv4(),
-    date: new Date().toDateString(),
+    date: new Date(),
   });
 
 const editnotes = ({ id, note, title }) => async (dispatch) => {

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deletenotes, editnotes } from "../redux/actions/noteaction";
+import FilterNotes from "./FilterNotes";
+import NotesListTable from "./NotesListTable";
+import UpdatingNotes from "./UpdatingNotes";
 
 class NotesList extends Component {
   constructor(props) {
@@ -10,6 +13,10 @@ class NotesList extends Component {
       note: "",
       updating: false,
       title: "",
+      sorting1: "Oldest",
+      filter1: "Week",
+      sortingArray1: ["Oldest", "Newest"],
+      filterArray1: ["Week", "Month", "Year"],
     };
   }
 
@@ -36,6 +43,7 @@ class NotesList extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     this.props.editnotes({
       id: this.state.id,
       note: this.state.note,
@@ -45,80 +53,42 @@ class NotesList extends Component {
   };
 
   render() {
+    var allnotes = this.props.notes;
+    if (this.state.sorting1 === "Newest") {
+      const sortedAllNotes = allnotes.slice().sort((a, b) => b.date - a.date);
+      allnotes = sortedAllNotes;
+    }
+    if (this.state.sorting1 === "Oldest") {
+      const sortedAllNotes = allnotes.slice().sort((a, b) => a.date - b.date);
+      allnotes = sortedAllNotes;
+    }
+
     return (
       <div>
-        {this.state.updating && (
-          <div className="notes">
-            <form className="form" onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                required
-                name="title"
-                placeholder="Title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-              <textarea
-                name="note"
-                required
-                placeholder="Write your notes here"
-                value={this.state.note}
-                onChange={this.handleChange}
-              ></textarea>
-              <button type="submit">Update</button>
-            </form>
-          </div>
-        )}
-
         <div>
           <button onClick={this.handlebackbutton}>Back</button>
         </div>
+        <UpdatingNotes
+          title={this.state.title}
+          notes={this.state.note}
+          updating={this.state.updating}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
 
-        <ul className="allnotes">
-          <h3>Your Personal Diary Notes</h3>
-
-          {this.props.notes.length === 0 ? (
-            <div>You have not added any Notes to your Diary.</div>
-          ) : (
-            <div></div>
-          )}
-
-          {this.props.notes.length !== 0 && (
-            <table className="table" style={{ width: "100%" }}>
-              <tr>
-                <th>Created On</th>
-                <th>Title</th>
-                <th>Notes</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-
-              {this.props.notes.map((notes, index) => (
-                <tr key={index}>
-                  <td>{notes.date}</td>
-                  <td>{notes.note}</td>
-                  <td>{notes.title}</td>
-                  <td>
-                    <button
-                      className="editButton"
-                      onClick={this.handleeditbutton(notes)}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => this.props.deletenotes(notes.id)}
-                      className="deletebutton"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </table>
-          )}
-        </ul>
+        <FilterNotes
+          allnotes={allnotes}
+          sorting1={this.state.sorting1}
+          filter1={this.state.filter1}
+          handleChange={this.handleChange}
+          sortingArray1={this.state.sortingArray1}
+          filterArray1={this.state.filterArray1}
+        />
+        <NotesListTable
+          allnotes={allnotes}
+          handleeditbutton={this.handleeditbutton}
+          deletenotes={this.props.deletenotes}
+        />
       </div>
     );
   }

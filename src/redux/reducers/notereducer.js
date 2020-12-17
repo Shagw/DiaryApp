@@ -29,9 +29,9 @@ export const notes = (state = initialState, action) => {
 
       const head = notelist.slice(0, noteIndex);
       const tail = notelist.slice(noteIndex + 1);
-      console.log(noteIndex, newDataObj, head, tail);
 
       const newTodos = [...head, newDataObj, ...tail];
+
       return {
         ...state,
         data: newTodos,
