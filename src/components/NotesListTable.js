@@ -10,13 +10,13 @@ class NotesListTable extends Component {
     let { month, year } = this.props;
     month = parseInt(month);
     year = parseInt(year);
-    const allnotes = this.props.allnotes;
+    let allnotes = this.props.allnotes;
     let sortedArraybymonth = allnotes.filter(function (note) {
       return (
         note.date.getMonth() + 1 === month && note.date.getFullYear() === year
       );
     });
-
+    allnotes = sortedArraybymonth;
     console.log(this.props, sortedArraybymonth, month, year);
     return (
       <>
