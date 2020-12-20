@@ -1,14 +1,23 @@
 import React, { Component } from "react";
+import { parse } from "uuid";
 
 class NotesListTable extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    var allnotes = this.props.allnotes;
-    var sortedArraybymonth = allnotes.filter(
-      (note) => note.date.getMonth() + 1 === this.props.month
-    );
-    var sortedArraybyyear = allnotes.filter(
-      (note) => note.date.getFullYear() === this.props.year
-    );
+    let { month, year } = this.props;
+    month = parseInt(month);
+    year = parseInt(year);
+    const allnotes = this.props.allnotes;
+    let sortedArraybymonth = allnotes.filter(function (note) {
+      return (
+        note.date.getMonth() + 1 === month && note.date.getFullYear() === year
+      );
+    });
+
+    console.log(this.props, sortedArraybymonth, month, year);
     return (
       <>
         <ul className="allnotes">

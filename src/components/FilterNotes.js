@@ -5,29 +5,17 @@ class FilterNotes extends Component {
     super(props);
   }
 
-  render() {
-    let recommendatonbyoptions = this.props.sortingArray1.map((item, index) => {
+  multipleOptions = (array) => {
+    return array.map((item, index) => {
       return (
         <option value={item} key={index}>
           {item}
         </option>
       );
     });
-    let yearsoption = this.props.yeararray.map((item, index) => {
-      return (
-        <option value={item} key={index}>
-          {item}
-        </option>
-      );
-    });
-    let monthsoption = this.props.montharray.map((item, index) => {
-      return (
-        <option value={item} key={index}>
-          {item}
-        </option>
-      );
-    });
+  };
 
+  render() {
     return (
       <div className="main">
         <h3>Your Personal Diary Notes</h3>
@@ -48,7 +36,7 @@ class FilterNotes extends Component {
                 value={this.props.sorting1}
                 onChange={this.props.handleChange}
               >
-                {recommendatonbyoptions}
+                {this.multipleOptions(this.props.sortingArray1)}
               </select>
             </div>
             <div className="filterdatewise">
@@ -59,7 +47,7 @@ class FilterNotes extends Component {
                 value={this.props.month}
                 onChange={this.props.handleChange}
               >
-                {monthsoption}
+                {this.multipleOptions(this.props.montharray)}
               </select>
               <label className="year">Year</label>
               <select
@@ -68,7 +56,7 @@ class FilterNotes extends Component {
                 value={this.props.year}
                 onChange={this.props.handleChange}
               >
-                {yearsoption}
+                {this.multipleOptions(this.props.yeararray)}
               </select>
             </div>
           </div>
